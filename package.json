@@ -1,0 +1,46 @@
+{
+  "name": "jarvis.css",
+  "version": "1.0.0",
+  "description": "Gulp task for compiling css",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sujimoshi/jarvis.css.git"
+  },
+  "keywords": [
+    "gulp",
+    "task",
+    "css",
+    "jarvis",
+    "less",
+    "sass",
+    "scss",
+    "stylus"
+  ],
+  "author": "Sujimoshi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sujimoshi/jarvis.css/issues"
+  },
+  "homepage": "https://github.com/Sujimoshi/jarvis.css#readme",
+  "dependencies": {
+    "deep-assign": "^2.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-jarvis": "^1.0.0",
+    "gulp-less": "^3.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^2.1.1",
+    "gulp-stylus": "^2.6.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.10",
+    "node-notifier": "^4.6.1",
+    "stream-combiner2": "^1.1.1"
+  },
+  "devDependencies": {}
+}

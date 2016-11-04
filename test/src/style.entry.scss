@@ -1,0 +1,10 @@
+@import "some";
+@import "simple";
+@import "normalize.css/normalize";
+
+$white: white;
+
+.body {
+  text-transform: uppercase;
+  background: $white;
+}
