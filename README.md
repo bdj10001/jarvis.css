@@ -1,10 +1,10 @@
-# jarvis-less
-Completed, easy to use, gulp task for compiling less to css.
+# jarvis-css
+Gulp task for compiling sass, scss, less, stylus to css.
 
-[![NPM](https://nodei.co/npm/jarvis-less.png)](https://npmjs.org/package/jarvis-less)
+[![NPM](https://nodei.co/npm/jarvis-less.png)](https://npmjs.org/package/jarvis.css)
 
 ## Installation
-`npm i --save-dev jarvis-less`
+`npm i --save-dev jarvis.css`
 
 ## Usage
 I tried to do usage of this task as simple as posible.
