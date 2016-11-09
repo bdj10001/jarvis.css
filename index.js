@@ -11,7 +11,6 @@ const jarvis = require('gulp-jarvis');
 const watch = require('gulp-watch');
 const helper = require('./helper');
 const deepAssign = require('deep-assign');
-const postcss = require('gulp-postcss');
 const cssnano = require('cssnano');
 var processors = {
     less: require('gulp-less'),
@@ -21,8 +20,9 @@ var processors = {
 };
 
 var defaultConfig = {
-    entry: `src/**/*.entry.less`,
+    entry: 'src/**/*.entry.less',
     output: 'dist/css/',
+    watch: ['src/**/{*.entry.less,*.less,*.css}', '!src/**/*.entry.css'],
     development: true,
     processor: 'less',
     plugins: {
