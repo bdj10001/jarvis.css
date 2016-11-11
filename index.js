@@ -11,12 +11,10 @@ const jarvis = require('gulp-jarvis');
 const watch = require('gulp-watch');
 const helper = require('./helper');
 const deepAssign = require('deep-assign');
-const cssnano = require('cssnano');
 var processors = {
     less: require('gulp-less'),
     sass: require('gulp-sass'),
     stylus: require('gulp-stylus'),
-    postcss: require('gulp-postcss')
 };
 
 var defaultConfig = {
@@ -33,7 +31,6 @@ var defaultConfig = {
         'watch': undefined,
         'sass': {includePaths: ['bower_components', 'node_modules']},
         'stylus': undefined,
-        'postcss': [],
     },
     onError: null
 };
@@ -42,17 +39,15 @@ module.exports = {
     run: function (conf) {
         var config = deepAssign(defaultConfig, conf);
         return function (done) {
-            var isPostcss = config.processor === 'postcss';
             var stime = new Date();
-            if (isPostcss && config.development) config.plugins.postcss.push(cssnano());
             return combiner(
                 gulp.src(config.entry),
                 jarvis.parse(),
                 (config.development ? sourcemaps.init() : gutil.noop()),
 
                 processors[config.processor](config.plugins[config.processor]),
-                (!isPostcss ? autoprefixer(config.plugins['autoprefixer']) : gutil.noop()),
-                (!config.development && !isPostcss ? minify(config.plugins['clean-css']) : gutil.noop()),
+                autoprefixer(config.plugins['autoprefixer']),
+                (!config.development ? minify(config.plugins['clean-css']) : gutil.noop()),
 
                 (config.development ? sourcemaps.write() : gutil.noop()),
                 jarvis.dest(config.output).on('end', (done) => {
