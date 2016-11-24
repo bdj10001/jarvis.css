@@ -18,9 +18,9 @@ var processors = {
 };
 
 var defaultConfig = {
-    entry: 'src/**/*.entry.less',
+    entry: '**/*.entry.less',
     output: 'dist/css/',
-    watch: ['src/**/{*.entry.less,*.less,*.css}', '!src/**/*.entry.css'],
+    watch: ['**/{*.entry.less,*.less,*.css}', '!**/*.entry.css', '!{node_modules,bower_components}/**/*'],
     development: true,
     processor: 'less',
     plugins: {

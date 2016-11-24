@@ -2,9 +2,9 @@ var gulp = require('gulp');
 var css = require('./index');
 
 css.defineTasks({
-    processor: 'sass',
-    entry: 'test/src/**/*.entry.scss',
+    // processor: 'sass',
+    // entry: 'test/src/**/*.entry.scss',
     output: 'test/dist/',
-    watch: 'test/src/**/{*.entry.scss,*.scss,*.css}',
+    // watch: 'test/src/**/{*.entry.scss,*.scss,*.css}',
     clean: 'test/dist',
 });
