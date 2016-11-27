@@ -1,5 +1,4 @@
-var gulp = require('gulp');
-var css = require('./index');
+const css = require('./index');
 
 css.defineTasks({
     // processor: 'sass',

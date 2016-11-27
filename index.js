@@ -11,16 +11,21 @@ const jarvis = require('gulp-jarvis');
 const watch = require('gulp-watch');
 const helper = require('./helper');
 const deepAssign = require('deep-assign');
-var processors = {
-    less: require('gulp-less'),
-    sass: require('gulp-sass'),
-    stylus: require('gulp-stylus'),
+
+let processors = {
+    less: () => require('gulp-less'),
+    sass: () => require('gulp-sass'),
+    stylus: () => require('gulp-stylus'),
 };
 
-var defaultConfig = {
-    entry: '**/*.entry.less',
+let defaultConfig = {
+    entry: ['**/*.entry.less', '!{node_modules,bower_components}/**/*'],
     output: 'dist/css/',
-    watch: ['**/{*.entry.less,*.less,*.css}', '!**/*.entry.css', '!{node_modules,bower_components}/**/*'],
+    watch: [
+        '!**/*.entry.css',
+        '!{node_modules,bower_components}/**/*',
+        '**/{*.entry.less,*.less,*.css}'
+    ],
     development: true,
     processor: 'less',
     plugins: {
@@ -35,17 +40,23 @@ var defaultConfig = {
     onError: null
 };
 
+const resolveWatch = (config) => {
+    let watch = (Array.isArray(config.watch)) ? config.watch : [config.watch];
+    if (watch.indexOf('!' + config.output.replace(/\/$/, "") + '/**/*') !== -1) return;
+    watch.push('!' + config.output.replace(/\/$/, "") + '/**/*');
+};
+
 module.exports = {
     run: function (conf) {
-        var config = deepAssign(defaultConfig, conf);
+        let config = deepAssign(defaultConfig, conf);
+        resolveWatch(config);
         return function (done) {
-            var stime = new Date();
+            let stime = new Date();
             return combiner(
                 gulp.src(config.entry),
                 jarvis.parse(),
                 (config.development ? sourcemaps.init() : gutil.noop()),
-
-                processors[config.processor](config.plugins[config.processor]),
+                processors[config.processor]()(config.plugins[config.processor]),
                 autoprefixer(config.plugins['autoprefixer']),
                 (!config.development ? minify(config.plugins['clean-css']) : gutil.noop()),
 
@@ -71,7 +82,7 @@ module.exports = {
         }
     },
     defineTasks: function (config) {
-        config = Object.assign(defaultConfig, {
+        config = deepAssign(defaultConfig, {
             buildName: 'css:build',
             watchName: 'css:watch',
             cleanName: 'css:clean'
@@ -85,6 +96,7 @@ module.exports = {
             watch(config.watch, (file) => {
                 return this.run(config)(done);
             });
+            // gulp.watch(config.watch, [config.buildName]);
         });
 
         if (config.clean) {
