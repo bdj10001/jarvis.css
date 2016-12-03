@@ -1,6 +1,6 @@
 {
   "name": "jarvis.css",
-  "version": "1.3.1",
+  "version": "1.4.1",
   "description": "Gulp task for compiling css",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,6 @@
     "gulp-autoprefixer": "^3.1.1",
     "gulp-clean": "^0.3.2",
     "gulp-clean-css": "^2.0.13",
-    "gulp-jarvis": "^1.0.0",
     "gulp-less": "^3.1.0",
     "gulp-postcss": "^6.2.0",
     "gulp-sass": "^2.3.2",

@@ -1077,13 +1077,6 @@ gulp-clean@^0.3.2:
     rimraf "^2.2.8"
     through2 "^0.4.2"
 
-gulp-jarvis@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/gulp-jarvis/-/gulp-jarvis-1.0.0.tgz#31bad2ab64a3bb62662691d4c6316df2baf0f6e0"
-  dependencies:
-    gulp "^3.9.1"
-    through2 "^2.0.1"
-
 gulp-less@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/gulp-less/-/gulp-less-3.2.0.tgz#f65c76dfa6a5199eb65a40cccf0172274c41b1a6"
@@ -3072,7 +3065,7 @@ through2@^0.6.1:
     readable-stream ">=1.0.33-1 <1.1.0-0"
     xtend ">=4.0.0 <4.1.0-0"
 
-through2@^2.0.0, through2@^2.0.1, through2@2.X:
+through2@^2.0.0, through2@2.X:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.1.tgz#384e75314d49f32de12eebb8136b8eb6b5d59da9"
   dependencies:

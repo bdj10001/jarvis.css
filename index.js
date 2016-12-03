@@ -7,7 +7,6 @@ const clean = require('gulp-clean');
 const autoprefixer = require('gulp-autoprefixer');
 const minify = require('gulp-clean-css');
 const gutil = require('gulp-util');
-const jarvis = require('gulp-jarvis');
 const watch = require('gulp-watch');
 const helper = require('./helper');
 const deepAssign = require('deep-assign');
@@ -54,14 +53,13 @@ module.exports = {
             let stime = new Date();
             return combiner(
                 gulp.src(config.entry),
-                jarvis.parse(),
                 (config.development ? sourcemaps.init() : gutil.noop()),
                 processors[config.processor]()(config.plugins[config.processor]),
                 autoprefixer(config.plugins['autoprefixer']),
                 (!config.development ? minify(config.plugins['clean-css']) : gutil.noop()),
 
                 (config.development ? sourcemaps.write() : gutil.noop()),
-                jarvis.dest(config.output).on('end', (done) => {
+                gulp.dest(config.output).on('end', (done) => {
                     helper.success('Processed', config.watchName, new Date() - stime);
                 })
             ).on('error', (error) => {
