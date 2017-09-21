@@ -8,13 +8,13 @@ Extremely fast gulp task for compiling sass, scss, less, stylus to css. Easy con
 
 ## Usage
 I tried to do usage of this task as simple as posible.
-The following example will compile all the _*.entry.less_ files under the folder _config.base_ into to destination _config.output_
+The following example will compile all the _*.entry.{less,sass,scss,stylus}_ files under the folder _config.input_ to destination folder _config.output_
 
 ```javascript
 const css = require('./src/index');
 const gulp = require('gulp')
 
-const cssConf = {output: 'test/dist', base: 'test/src', processor: 'less'}
+const cssConf = {output: 'test/dist', input: 'test/src', processor: 'less'}
 gulp.task('css:build', css.build(cssConf))
 gulp.task('css:watch', ['css:build'], css.watch(cssConf))
 

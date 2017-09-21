@@ -1,6 +1,6 @@
 {
   "name": "jarvis.css",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Gulp task for compiling css",
   "main": "src/index.js",
   "scripts": {
