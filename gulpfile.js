@@ -1,9 +1,6 @@
-const css = require('./index');
+const css = require('./src/index');
+const gulp = require('gulp')
 
-css.defineTasks({
-    // processor: 'sass',
-    // entry: 'test/src/**/*.entry.scss',
-    output: 'test/dist/',
-    // watch: 'test/src/**/{*.entry.scss,*.scss,*.css}',
-    clean: 'test/dist',
-});
+const cssConf = {output: 'test/dist', input: 'test/src'}
+gulp.task('css:build', css.build(cssConf))
+gulp.task('css:watch', ['css:build'], css.watch(cssConf))
