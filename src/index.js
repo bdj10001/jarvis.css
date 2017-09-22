@@ -14,14 +14,14 @@ let processors = {
 
 let defaultConfig = {
     entry: [
-        '**/{*.entry.less,*.entry.sass,*.entry.scss,*.entry.stylus}',
+        '**/{*.build.less,*.build.sass,*.build.scss,*.build.stylus}',
         '!{node_modules,bower_components}/**/*'
     ],
     input: 'src/css/',
     output: 'dist/css/',
     watch: [
         '**/{*.less,*.css,*.sass,*.scss,*.stylus}',
-        '!**/*.entry.css',
+        '!**/*.build.css',
         '!{node_modules,bower_components}/**/*'
     ],
     development: true,
@@ -62,7 +62,6 @@ let css = module.exports = {
     build: function (conf) {
         let config = jarvis.dassign(defaultConfig, conf);
         return function (done) {
-            let stime = new Date();
             return jarvis.combine(
                 gulp.src(getEntry(config), { base: config.input }),
                 (config.development ? sourcemaps.init() : jarvis.gutil.noop()),
@@ -71,10 +70,8 @@ let css = module.exports = {
                 (!config.development ? minify(config.plugins['clean-css']) : jarvis.gutil.noop()),
                 (config.development ? sourcemaps.write() : jarvis.gutil.noop()),
                 jarvis.destClean(config.output),
-                gulp.dest(config.output).on('end', (done) => {
-                    jarvis.success('Processed', 'css.build', new Date() - stime);
-                })
-            ).on('error', jarvis.handleError);
+                gulp.dest(config.output)
+            )
         };
     }
 };
