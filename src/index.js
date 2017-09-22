@@ -38,23 +38,18 @@ let defaultConfig = {
     }
 };
 
-let getEntry = function(conf) {
-    let res = conf.entry;
-    res[0] = path.resolve(conf.input, res[0])
+let resolveGlobs = function(base, entries) {
+    let res = Array.isArray(entries) ? entries : [entries]
+    res = res.map(el => el.charAt(0) !== '/' ? path.resolve(base, el) : el)
+    res.push('!{node_modules,bower_components}/**/*')
     return res;
-}
-
-let getWatch = function(conf) {
-    let res = conf.watch;
-    res[0] = path.resolve(conf.input, res[0])
-    return res
 }
 
 let css = module.exports = {
     watch: function (conf) {
         let config = jarvis.dassign(defaultConfig, conf);
         return function (done) {
-            jarvis.watch(getWatch(config), (file) => {
+            jarvis.watch(resolveGlobs(config.input, config.watch), (file) => {
                 return css.build(config)(done);
             });
         }
@@ -63,7 +58,7 @@ let css = module.exports = {
         let config = jarvis.dassign(defaultConfig, conf);
         return function (done) {
             return jarvis.combine(
-                gulp.src(getEntry(config), { base: config.input }),
+                gulp.src(resolveGlobs(config.input, config.entry), { base: config.input }),
                 (config.development ? sourcemaps.init() : jarvis.gutil.noop()),
                 processors[config.processor]()(config.plugins[config.processor]),
                 autoprefixer(config.plugins['autoprefixer']),
