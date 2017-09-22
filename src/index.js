@@ -40,8 +40,7 @@ let defaultConfig = {
 
 let resolveGlobs = function(base, entries) {
     let res = Array.isArray(entries) ? entries : [entries]
-    res = res.map(el => el.charAt(0) !== '/' ? path.resolve(base, el) : el)
-    res.push('!{node_modules,bower_components}/**/*')
+    res = res.map(el => el.charAt(0) !== '/' && el.charAt(0) !== '!' ? path.resolve(base, el) : el)
     return res;
 }
 
