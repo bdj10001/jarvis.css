@@ -63,7 +63,6 @@ let css = module.exports = {
                 autoprefixer(config.plugins['autoprefixer']),
                 (!config.development ? minify(config.plugins['clean-css']) : jarvis.gutil.noop()),
                 (config.development ? sourcemaps.write() : jarvis.gutil.noop()),
-                jarvis.destClean(config.output),
                 gulp.dest(config.output)
             )
         };
